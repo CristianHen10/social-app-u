@@ -1,0 +1,28 @@
+.container-general {
+	display: grid;
+    /* height: 100%; */
+    grid-template-columns: 30% 70%;
+}
+
+.container-left {
+	height: 94.8vh;
+    background-color: #A3D2CA;
+    padding: 25px;
+    display: grid;
+}
+
+.content-slogan {
+	font-family: 'Roboto';
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.content-img > img {
+	width: 100%;
+}
+
+.content-copy {
+	display: flex;
+    place-content: flex-start;
+    place-items: flex-end;
+}
