@@ -1,0 +1,20 @@
+[
+    {
+        "idMenu": 1,
+        "nombre": "Inicio",
+        "descripcion":"Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica",
+        "ruta": "/"
+    },
+    {
+        "idMenu": 2,
+        "nombre": "Necesidades",
+        "descripcion":"En esta pagina podra acceder de manera facil a la administracion de todas las necesidades que este teniedo en este momento.",
+        "ruta": "/necesidades"
+    },
+    {
+        "idMenu": 3,
+        "nombre": "Bienes Actuales",
+        "descripcion":"Aqui podra administrar todos los elementos o bienes que actualmente posea y asi mismo hacerle un seguimiento constante.",
+        "ruta": "/bienes"
+    }
+]

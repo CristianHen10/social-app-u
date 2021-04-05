@@ -13,11 +13,13 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import { AccountCircle } from "@material-ui/icons";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import { NavLink } from 'react-router-dom';
+
+import DataMenu from '../data/menu.json';
+import IconoMenuComponent from "../components/IconoMenuComponent";
 
 const drawerWidth = 240;
 
@@ -59,12 +61,17 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    paddingTop: theme.spacing(7),
+  },
+  linkToLogin : {
+    textDecoration: "none",
+    color: "inherit",
   },
 }));
 
-export default function MainLayout() {
+export default function MainLayout({children}) {
   const classes = useStyles();
-  const theme = useTheme();
+  //const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openD, setOpenD] = React.useState(false);
   const open = Boolean(anchorEl);
@@ -81,9 +88,9 @@ export default function MainLayout() {
     setOpenD(true);
   };
 
-  const handleDrawerClose = () => {
-    setOpenD(false);
-  };
+  // const handleDrawerClose = () => {
+  //   setOpenD(false);
+  // };
 
   return (
     <div className={classes.root}>
@@ -130,6 +137,7 @@ export default function MainLayout() {
             >
               <MenuItem>Profile</MenuItem>
               <MenuItem>My Account</MenuItem>
+              <MenuItem><NavLink className={classes.linkToLogin} to="/login">Logout</NavLink></MenuItem>
             </Menu>
           </div>
         </Toolbar>
@@ -146,34 +154,21 @@ export default function MainLayout() {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem button key={text}>
+            {DataMenu.map((values) => (
+              <ListItem button key={values.idMenu}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <IconoMenuComponent idMenu={values.idMenu} />
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText>
+                  <NavLink className={classes.linkToLogin} to={values.ruta}>{values.nombre}</NavLink>
+                </ListItemText>
               </ListItem>
             ))}
           </List>
         </div>
       </Drawer>
       <main className={classes.content}>
-        <Toolbar />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
+        {children}
       </main>
     </div>
   );
